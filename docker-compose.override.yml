@@ -1,0 +1,33 @@
+services:
+  langfuse-web:
+    ports: !override
+      - '20010:3000'              # 想只绑本机改成 '127.0.0.1:20010:3000'
+    environment:
+      NEXTAUTH_URL: 'http://localhost:20010'
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: 'http://localhost:20014'
+      LANGFUSE_S3_BATCH_EXPORT_EXTERNAL_ENDPOINT: 'http://localhost:20014'
+
+  langfuse-worker:
+    ports: !override
+      - '127.0.0.1:20011:3030'
+    environment:
+      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: 'http://localhost:20014'
+      LANGFUSE_S3_BATCH_EXPORT_EXTERNAL_ENDPOINT: 'http://localhost:20014'
+
+  clickhouse:
+    ports: !override
+      - '127.0.0.1:20012:8123'
+      - '127.0.0.1:20013:9000'
+
+  minio:
+    ports: !override
+      - '20014:9000'              # 想只绑本机改成 '127.0.0.1:20014:9000'
+      - '127.0.0.1:20015:9001'
+
+  redis:
+    ports: !override
+      - '127.0.0.1:20016:6379'
+
+  postgres:
+    ports: !override
+      - '127.0.0.1:20017:5432'
