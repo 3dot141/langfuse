@@ -2,17 +2,10 @@ services:
   langfuse-web:
     ports: !override
       - '20010:3000'              # 想只绑本机改成 '127.0.0.1:20010:3000'
-    environment:
-      NEXTAUTH_URL: 'http://localhost:20010'
-      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: 'http://localhost:20014'
-      LANGFUSE_S3_BATCH_EXPORT_EXTERNAL_ENDPOINT: 'http://localhost:20014'
 
   langfuse-worker:
     ports: !override
       - '127.0.0.1:20011:3030'
-    environment:
-      LANGFUSE_S3_MEDIA_UPLOAD_ENDPOINT: 'http://localhost:20014'
-      LANGFUSE_S3_BATCH_EXPORT_EXTERNAL_ENDPOINT: 'http://localhost:20014'
 
   clickhouse:
     ports: !override
